@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.fabricio.gestao_vagas.modules.candidate.CandidateEntity;
 import br.com.fabricio.gestao_vagas.modules.company.entities.CompanyEntity;
 
 public interface CompanyRepository extends JpaRepository<CompanyEntity, UUID>{
