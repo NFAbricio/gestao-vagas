@@ -1,4 +1,4 @@
-package br.com.fabricio.gestao_vagas.modules.candidate;
+package br.com.fabricio.gestao_vagas.modules.company.entities;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,15 +15,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+@Entity(name = "company")
 @Data
-@Entity(name = "candiadates")
-public class CandidateEntity {
-    
+public class CompanyEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private String name;
-    
+   
     @NotBlank
     @Pattern(regexp = "\\S+", message = "Username cannot be blank and not have spaces")
     private String username;
@@ -33,19 +32,10 @@ public class CandidateEntity {
     
     @Length(min = 5, max = 50, message = "Password must have at least 8 characters")
     private String password;
+    private String website;
+    private String name;
     private String description;
-    private String curriculum;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-    public String getCurriculum() {
-        return curriculum;
-    }
-
-    public void setCurriculum(String curriculum) {
-        this.curriculum = curriculum;
-    }
-
-
 }
