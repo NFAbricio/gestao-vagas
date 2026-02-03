@@ -33,3 +33,9 @@ build/
 .vscode/
 
 .yaml
+
+.porperties
+*.log
+*.tmp
+*.bak
+*.swp
