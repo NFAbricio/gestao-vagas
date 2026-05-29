@@ -28,11 +28,11 @@ public class JobEntity {
     private String level;
     private String description;
 
-    @Column(name = "company_id", insertable = false, updatable = false, nullable = false)
+    @Column(name = "company_id")
     private UUID companyId;
 
     @ManyToOne() // many jobs to one company
-    @JoinColumn(name = "company_id")
+    @JoinColumn(name = "company_id", insertable = false, updatable = false)
     private CompanyEntity companyEntity;
 
     @CreationTimestamp

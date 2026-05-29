@@ -10,8 +10,8 @@ import br.com.fabricio.gestao_vagas.modules.company.entities.JobEntity;
 import br.com.fabricio.gestao_vagas.modules.company.useCases.CreateJobUseCase;
 import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/job")
+@RestController("candidateJobController")
+@RequestMapping("/candidate/job")
 public class JobController {
     
     @Autowired

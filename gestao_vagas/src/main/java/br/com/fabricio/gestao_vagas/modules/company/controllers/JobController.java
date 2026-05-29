@@ -13,8 +13,8 @@ import br.com.fabricio.gestao_vagas.modules.company.useCases.CreateJobUseCase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/job")
+@RestController("companyJobController")
+@RequestMapping("/company/job")
 public class JobController {
     
     @Autowired

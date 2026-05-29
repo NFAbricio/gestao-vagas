@@ -1,5 +1,10 @@
 package br.com.fabricio.gestao_vagas.modules.company.useCases;
 
+import br.com.fabricio.gestao_vagas.modules.company.controllers.AuthCompanyController;
+
+import java.time.Duration;
+import java.time.Instant;
+
 import javax.naming.AuthenticationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,32 +24,33 @@ public class AuthCompanyUseCase {
     
     @Value("${security.token.secret}")
     private String secretKey;
-    
+
     @Autowired
     private CompanyRepository companyRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
-    public String execute(AuthCompanyDTO authCompanyDto) throws AuthenticationException {
-        var company = this.companyRepository.findByUsername(authCompanyDto.getUsername()).orElseThrow(
-            () -> {
-                throw new UsernameNotFoundException("User not found");
-            });
 
-        //verify if password matches
-        var passwordMatches = this.passwordEncoder.matches(authCompanyDto.getPassword(), company.getPassword());
-        //if not, throw exception
-        if (!passwordMatches) {
+
+    public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+        var company = this.companyRepository.findByUsername(authCompanyDTO.getUsername()).orElseThrow(
+            () -> {
+                throw new UsernameNotFoundException("username/password incorrect");
+            }
+        );
+
+        var passwordMatches = this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
+
+        if(!passwordMatches)
+        {
             throw new AuthenticationException();
         }
 
-        //if matches, generate Token
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
-        var token =JWT.create().withIssuer("javagas")
-        .withSubject(company.getId().toString())
-        .sign(algorithm);
-
+        var token = JWT.create().withIssuer("javagas")
+            .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+            .withSubject(company.getId().toString())
+            .sign(algorithm);
         return token;
     }
 
