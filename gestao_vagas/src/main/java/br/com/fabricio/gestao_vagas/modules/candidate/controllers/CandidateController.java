@@ -21,12 +21,16 @@ public class CandidateController {
     private CreateCandidateUseCase createCandidateUseCase;
 
     @PostMapping("/")
-    public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
-       try{
-            var result = this.createCandidateUseCase.execute(candidateEntity);
-            return ResponseEntity.ok().body(result);
-       }catch(Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-       }
-    }
+//     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
+//        try{
+//             var result = this.createCandidateUseCase.execute(candidateEntity);
+//             return ResponseEntity.ok().body(result);
+//        }catch(Exception e){
+//             return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//     }
+     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) throws Exception {
+          var result = this.createCandidateUseCase.execute(candidateEntity);
+          return ResponseEntity.ok().body(result);
+     }
 }
