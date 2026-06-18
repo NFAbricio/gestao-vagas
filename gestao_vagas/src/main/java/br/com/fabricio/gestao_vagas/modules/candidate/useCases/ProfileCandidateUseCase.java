@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import br.com.fabricio.gestao_vagas.modules.candidate.CandidateEntity;
 import br.com.fabricio.gestao_vagas.modules.candidate.CandidateRepository;
 import br.com.fabricio.gestao_vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
 
@@ -15,7 +16,7 @@ public class ProfileCandidateUseCase {
     @Autowired
     private CandidateRepository candidateRepository;
 
-    public void execute(UUID idCandidate)
+    public CandidateEntity execute(UUID idCandidate)
     {
         var candidate = this.candidateRepository.findById(idCandidate)
         .orElseThrow(() -> {
