@@ -26,7 +26,7 @@ public class SecurityCandidateFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
                 //each http requisition load in your own thread, because of default MODE_THREADLOCAL 
-                SecurityContextHolder.getContext().setAuthentication(null);
+                // SecurityContextHolder.getContext().setAuthentication(null);
                 String header = request.getHeader("Authorization");
 
                 if (request.getRequestURI().startsWith("/candidate"))
